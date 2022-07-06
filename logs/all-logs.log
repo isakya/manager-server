@@ -1,0 +1,8 @@
+[2022-07-06T19:58:06.669] [INFO] info - **数据库链接成功**
+[2022-07-06T19:58:18.263] [INFO] info - get params:{}
+[2022-07-06T19:58:18.264] [INFO] info - post params:{"userName":"123456","userPwd":"123456"}
+[2022-07-06T19:58:25.356] [INFO] info - get params:{}
+[2022-07-06T19:58:25.358] [INFO] info - post params:{"userName":"admin","userPwd":"123456"}
+[2022-07-06T19:58:32.957] [INFO] info - **数据库链接成功**
+[2022-07-06T19:58:39.344] [INFO] info - get params:{}
+[2022-07-06T19:58:39.345] [INFO] info - post params:{}
