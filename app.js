@@ -7,6 +7,7 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const log4js = require('./utils/log4j.js')
 const users = require('./routes/users')
+const jwt = require('jsonwebtoken')
 const router = require('koa-router')()
 require('./config/db')
 // error handler
@@ -32,6 +33,12 @@ app.use(async (ctx, next) => {
 })
 
 router.prefix('/api')
+router.get('/leave/count', (ctx) => {
+  const token = ctx.request.headers.authorization.split(' ')[1]
+  const payload = jwt.verify(token, 'izumi')
+  console.log(payload)
+  ctx.body = 'hello'
+})
 router.use(users.routes(), users.allowedMethods())
 
 app.use(router.routes(), router.allowedMethods())
