@@ -49,4 +49,5 @@ module.exports = {
       msg
     }
   },
+  CODE
 }
