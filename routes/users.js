@@ -22,7 +22,7 @@ router.post('/login', async ctx => {
     const data = res._doc
     const token = jwt.sign({
       data
-    }, 'izumi', { expiresIn: '1h' })
+    }, 'izumi', { expiresIn: '1d' })
     if (res) {
       data.token = token
       ctx.body = util.success(data)
@@ -94,7 +94,7 @@ router.post('/operate', async (ctx) => {
     }
     const res = await User.findOne({ $or: [{ userName }, { userEmail }] }, '_id userName userEmail')
     if (res) {
-      ctx.body = util.fail(`系统检测到有重复的用户，信息如下：${res.userName} - $${res.userEmail}`)
+      ctx.body = util.fail(`系统检测到有重复的用户，信息如下：${res.userName} - ${res.userEmail}`)
     } else {
       // 让用户id自增长，$inc是把原数据查找处理再 + xxx
       const doc = await Counter.findOneAndUpdate({ _id: 'userId' }, { $inc: { sequence_value: 1 } }, { new: true })

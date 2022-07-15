@@ -12,6 +12,7 @@ const koajwt = require('koa-jwt')
 const util = require('./utils/util')
 
 const users = require('./routes/users')
+const menus = require('./routes/menus')
 
 
 require('./config/db')
@@ -50,6 +51,7 @@ app.use(koajwt({ secret: 'izumi' }).unless({
 router.prefix('/api')
 
 router.use(users.routes(), users.allowedMethods())
+router.use(menus.routes(), menus.allowedMethods())
 
 app.use(router.routes(), router.allowedMethods())
 // error-handling
