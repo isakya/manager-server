@@ -74,6 +74,16 @@ router.post('/operate', async (ctx) => {
 
 
 
-
+// 权限设置
+router.post('/update/permission', async (ctx) => {
+  const { _id, permissionList } = ctx.request.body
+  try {
+    let params = { permissionList, updateTime: new Date() }
+    let res = await Role.findByIdAndUpdate(_id, { permissionList })
+    ctx.body = util.success(res, '权限设置成功')
+  } catch (error) {
+    ctx.body = util.fail('权限设置失败')
+  }
+})
 
 module.exports = router
