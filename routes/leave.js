@@ -98,6 +98,7 @@ router.post('/operate', async (ctx) => {
   }
 })
 
+// 审核接口
 router.post('/approve', async (ctx) => {
   const { remark, action, _id } = ctx.request.body
   let authorization = ctx.request.headers.authorization
@@ -132,6 +133,21 @@ router.post('/approve', async (ctx) => {
     params.auditLogs = auditLogs
     const res = await Leave.findByIdAndUpdate(_id, params)
     ctx.body = util.success('', '处理成功')
+  } catch (error) {
+    ctx.body = util.fail(`查询异常: ${error.message}`)
+  }
+})
+
+// 通知列表
+router.get('/count', async (ctx) => {
+  let authorization = ctx.request.headers.authorization
+  let { data } = util.decoded(authorization)
+  try {
+    let params = {}
+    params.curAuditUserName = data.userName
+    params.$or = [{ applyState: 1 }, { applyState: 2 }]
+    const total = await Leave.countDocuments(params)
+    ctx.body = util.success(total, '查询成功')
   } catch (error) {
     ctx.body = util.fail(`查询异常: ${error.message}`)
   }
