@@ -16,7 +16,10 @@ const menus = require('./routes/menus')
 const roles = require('./routes/roles')
 const depts = require('./routes/depts')
 const leave = require('./routes/leave')
+const test = require('./routes/test')
 
+const cors = require('@koa/cors')
+app.use(cors())  // 放到最前面，引用以后
 
 require('./config/db')
 // error handler
@@ -58,6 +61,7 @@ router.use(menus.routes(), menus.allowedMethods())
 router.use(roles.routes(), roles.allowedMethods())
 router.use(depts.routes(), depts.allowedMethods())
 router.use(leave.routes(), leave.allowedMethods())
+router.use(test.routes(), test.allowedMethods())
 
 app.use(router.routes(), router.allowedMethods())
 // error-handling
